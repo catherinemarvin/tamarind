@@ -8,16 +8,33 @@
   </body>
 
   <script>
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-
-    function preload() {
+    var preload = function () {
+      game.load.image("player", "assets/pics/player.png");
     }
 
-    function create() {
+    var sprite;
+    var create = function () {
+      game.physics.startSystem(Phaser.Physics.ARCADE);
+      sprite = game.add.sprite(game.world.centerX, game.world.centerY, "player");
+      sprite.anchor.set(0.5);
+
+      game.physics.arcade.enable(sprite);
     }
 
-    function update() {
+    var update = function () {
+      if (game.physics.arcade.distanceToPointer(sprite, game.input.activePointer) > 8) {
+        game.physics.arcade.moveToPointer(sprite, 300);
       }
+      else {
+        sprite.body.velocity.set(0);
+      }
+    }
+
+    var render = function () {
+      game.debug.inputInfo(32,32);
+    }
+
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
   </script>
 
 </html>
