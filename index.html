@@ -8,6 +8,8 @@
   </body>
 
   <script>
+
+
     var preload = function () {
       game.load.image("player", "assets/pics/player.png");
     }
@@ -16,6 +18,7 @@
     var create = function () {
       game.physics.startSystem(Phaser.Physics.ARCADE);
       game.physics.arcade.checkCollision.down = false;
+      game.physics.arcade.gravity.y = 250;
 
       player = game.add.sprite(game.world.centerX, game.world.centerY, "player");
       player.anchor.set(0.5);
@@ -24,7 +27,8 @@
 
       player.body.collideWorldBounds = true;
       player.body.bounce.set(1);
-
+      player.checkWorldBounds = true;
+      player.events.onOutOfBounds.add(playerLost, this);
     }
 
     var update = function () {
@@ -34,6 +38,11 @@
     var render = function () {
       game.debug.inputInfo(32,32);
     }
+
+    var playerLost = function () {
+      alert("You lose!");
+    }
+
 
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
   </script>
