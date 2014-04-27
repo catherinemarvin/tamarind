@@ -12,22 +12,23 @@
       game.load.image("player", "assets/pics/player.png");
     }
 
-    var sprite;
+    var player;
     var create = function () {
       game.physics.startSystem(Phaser.Physics.ARCADE);
-      sprite = game.add.sprite(game.world.centerX, game.world.centerY, "player");
-      sprite.anchor.set(0.5);
+      game.physics.arcade.checkCollision.down = false;
 
-      game.physics.arcade.enable(sprite);
+      player = game.add.sprite(game.world.centerX, game.world.centerY, "player");
+      player.anchor.set(0.5);
+
+      game.physics.arcade.enable(player);
+
+      player.body.collideWorldBounds = true;
+      player.body.bounce.set(1);
+
     }
 
     var update = function () {
-      if (game.physics.arcade.distanceToPointer(sprite, game.input.activePointer) > 8) {
-        game.physics.arcade.moveToPointer(sprite, 300);
-      }
-      else {
-        sprite.body.velocity.set(0);
-      }
+      player.body.x = game.input.x;
     }
 
     var render = function () {
