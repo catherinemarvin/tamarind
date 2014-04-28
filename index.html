@@ -15,6 +15,13 @@
     }
 
     var player;
+
+    var lives = 3;
+    var score = 0;
+    var scoreText;
+    var livesText;
+    var introText;
+
     var create = function () {
       game.physics.startSystem(Phaser.Physics.ARCADE);
       game.physics.arcade.checkCollision.down = false;
@@ -29,6 +36,14 @@
       player.body.bounce.set(1);
       player.checkWorldBounds = true;
       player.events.onOutOfBounds.add(playerLost, this);
+
+      // Text setup
+      scoreText = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
+      livesText = game.add.text(680, 550, 'lives: 3', { font: "20px Arial", fill: "#ffffff", align: "left" });
+      introText = game.add.text(game.world.centerX, 400, '- CLICK TO START -', { font: "40px Arial", fill: "#ffffff", align: "center" });
+      introText.anchor.setTo(0.5, 0.5);
+
+      game.input.onDown.add(releasePlayer, this);
     }
 
     var update = function () {
@@ -41,6 +56,15 @@
 
     var playerLost = function () {
       alert("You lose!");
+    }
+
+    var releasePlayer = function () {
+      introText.visible = false;
+
+      if (playerOnGround) {
+        // Have the player jump
+      }
+
     }
 
 
