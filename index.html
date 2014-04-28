@@ -29,9 +29,8 @@
       game.physics.arcade.checkCollision.down = false;
 
       player = game.add.sprite(game.world.centerX, game.world.centerY, "player");
-      player.anchor.set(0.5);
-
       game.physics.arcade.enable(player);
+      player.anchor.set(0.5);
 
       player.body.collideWorldBounds = true;
       player.body.bounce.set(1);
@@ -58,6 +57,9 @@
 
     var update = function () {
       player.body.x = game.input.x;
+
+      // Collide the player with any platforms
+      game.physics.arcade.collide(player, platforms);
     }
 
     var render = function () {
@@ -71,11 +73,6 @@
     var releasePlayer = function () {
       introText.visible = false;
       player.body.gravity.y = 300;
-
-      if (playerOnGround) {
-        // Have the player jump
-      }
-
     }
 
 
