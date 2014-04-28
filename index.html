@@ -12,9 +12,11 @@
 
     var preload = function () {
       game.load.image("player", "assets/pics/player.png");
+      game.load.image("platform", "assets/pics/platform.png");
     }
 
     var player;
+    var platforms;
 
     var lives = 3;
     var score = 0;
@@ -25,7 +27,6 @@
     var create = function () {
       game.physics.startSystem(Phaser.Physics.ARCADE);
       game.physics.arcade.checkCollision.down = false;
-      game.physics.arcade.gravity.y = 250;
 
       player = game.add.sprite(game.world.centerX, game.world.centerY, "player");
       player.anchor.set(0.5);
@@ -36,6 +37,15 @@
       player.body.bounce.set(1);
       player.checkWorldBounds = true;
       player.events.onOutOfBounds.add(playerLost, this);
+
+      // Platforms setup
+
+      platforms = game.add.group();
+      platforms.enableBody = true;
+
+      var ground = platforms.create(0, game.world.height - 64, 'platform');
+      ground.scale.setTo(800,600);
+      ground.body.immovable = true;
 
       // Text setup
       scoreText = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
@@ -55,11 +65,12 @@
     }
 
     var playerLost = function () {
-      alert("You lose!");
+      console.log("You lose");
     }
 
     var releasePlayer = function () {
       introText.visible = false;
+      player.body.gravity.y = 300;
 
       if (playerOnGround) {
         // Have the player jump
