@@ -59,7 +59,7 @@
       player.body.x = game.input.x;
 
       // Collide the player with any platforms
-      game.physics.arcade.collide(player, platforms);
+      game.physics.arcade.collide(player, platforms, regularJump);
     }
 
     var render = function () {
@@ -72,7 +72,12 @@
 
     var releasePlayer = function () {
       introText.visible = false;
-      player.body.gravity.y = 300;
+      player.body.gravity.y = 600;
+    }
+
+    var regularJump = function () {
+      console.log("Boing!");
+      player.body.velocity.y = -700;
     }
 
 
