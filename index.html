@@ -46,6 +46,9 @@
       ground.scale.setTo(800,600);
       ground.body.immovable = true;
 
+      var startingPlatform = platforms.create(0, game.world.height - 200, 'platform');
+      ground.body.immovable = true;
+
       // Text setup
       scoreText = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
       livesText = game.add.text(680, 550, 'lives: 3', { font: "20px Arial", fill: "#ffffff", align: "left" });
