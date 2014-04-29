@@ -34,6 +34,7 @@
 
       player.body.collideWorldBounds = true;
       player.body.bounce.set(1);
+      player.body.checkCollision.up = false;
       player.checkWorldBounds = true;
       player.events.onOutOfBounds.add(playerLost, this);
 
