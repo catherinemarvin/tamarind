@@ -62,10 +62,6 @@
       game.physics.arcade.collide(player, platforms, regularJump);
     }
 
-    var render = function () {
-      game.debug.inputInfo(32,32);
-    }
-
     var playerLost = function () {
       console.log("You lose");
     }
@@ -81,7 +77,7 @@
     }
 
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
   </script>
 
 </html>
